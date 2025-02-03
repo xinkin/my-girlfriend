@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { phrases } from "@/utils/phrases";
+import BackgroundMusic from "@/components/BackgroundMusic";
 
 const ValentineProposal = () => {
   const [noButtonStyle, setNoButtonStyle] = useState<React.CSSProperties>({
@@ -58,6 +59,7 @@ const ValentineProposal = () => {
   return (
     <div className="min-h-screen w-full bg-pink-50 flex flex-col items-center justify-center p-4 relative overflow-hidden">
       {/* <BloomingFlower show={showSuccess} /> */}
+      <BackgroundMusic play={showSuccess} />
       {!showSuccess ? (
         <>
           <div className="w-full max-w-lg text-center px-4">
