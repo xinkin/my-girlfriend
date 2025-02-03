@@ -157,7 +157,7 @@ const ValentineProposal = () => {
               I love you baby.
             </h1>
             <p className="text-lg md:text-xl text-pink-500">
-              You are precious to me, and I want to be with you.
+              You are precious to me and I really want to be with you.
             </p>
           </div>
         </div>
