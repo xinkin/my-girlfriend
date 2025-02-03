@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef } from "react";
 
 const BackgroundMusic = ({ play }: { play: boolean }) => {
@@ -22,7 +23,7 @@ const BackgroundMusic = ({ play }: { play: boolean }) => {
       className="hidden"
       src="/audio/dildara.mp3"
       onTimeUpdate={() => {
-        // Optional: Loop specific portion (e.g., 45s to 1m30s)
+        // Loop specific portion (e.g., 45s to 1m30s)
         if (audioRef.current && audioRef.current.currentTime >= 240) {
           audioRef.current.currentTime = 30;
         }
