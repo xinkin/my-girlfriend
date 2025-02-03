@@ -5,6 +5,7 @@ import Image from "next/image";
 import { phrases } from "@/utils/phrases";
 import BackgroundMusic from "@/components/BackgroundMusic";
 import GlowingHeartsBackground from "@/components/GlowingHearts";
+import FloatingPetals from "@/components/Petals";
 
 const ValentineProposal = () => {
   const [noButtonStyle, setNoButtonStyle] = useState<React.CSSProperties>({
@@ -34,16 +35,16 @@ const ValentineProposal = () => {
     const padding = 20;
     const buttonWidth = 120;
     const buttonHeight = 40;
+    const safeDistance = 150; // Minimum distance from Yes button
 
     // Calculate safe boundaries
     const maxX = Math.max(0, windowDimensions.width - buttonWidth - padding);
     const maxY = Math.max(0, windowDimensions.height - buttonHeight - padding);
 
-    const yesButtonRegion = {
-      left: windowDimensions.width / 2 - 100,
-      right: windowDimensions.width / 2 + 100,
-      top: windowDimensions.height / 2 - 50,
-      bottom: windowDimensions.height / 2 + 50,
+    // Yes button center position
+    const yesButtonCenter = {
+      x: windowDimensions.width / 2,
+      y: windowDimensions.height / 2,
     };
 
     let x, y;
@@ -54,21 +55,27 @@ const ValentineProposal = () => {
       x = Math.min(Math.max(padding, Math.random() * maxX), maxX);
       y = Math.min(Math.max(padding, Math.random() * maxY), maxY);
 
-      // Check if position overlaps with Yes button region
-      isValidPosition = !(
-        x < yesButtonRegion.right &&
-        x + buttonWidth > yesButtonRegion.left &&
-        y < yesButtonRegion.bottom &&
-        y + buttonHeight > yesButtonRegion.top
+      // Calculate distance from Yes button center to new No button center
+      const distance = Math.sqrt(
+        Math.pow(x + buttonWidth / 2 - yesButtonCenter.x, 2) +
+          Math.pow(y + buttonHeight / 2 - yesButtonCenter.y, 2),
       );
+
+      // Position is valid if it's far enough from the Yes button
+      isValidPosition = distance >= safeDistance;
 
       attempts++;
     } while (!isValidPosition && attempts < 50);
 
     // Fallback position if no valid spot found
     if (!isValidPosition) {
-      x = Math.random() < 0.5 ? padding : maxX;
-      y = Math.random() < 0.5 ? padding : maxY;
+      const angle = Math.random() * 2 * Math.PI;
+      x = yesButtonCenter.x + Math.cos(angle) * safeDistance - buttonWidth / 2;
+      y = yesButtonCenter.y + Math.sin(angle) * safeDistance - buttonHeight / 2;
+
+      // Ensure the fallback position is within bounds
+      x = Math.min(Math.max(padding, x), maxX);
+      y = Math.min(Math.max(padding, y), maxY);
     }
 
     setNoButtonStyle({
@@ -89,8 +96,10 @@ const ValentineProposal = () => {
     <div className="min-h-screen w-full bg-pink-50 flex flex-col items-center justify-center p-4 relative z-10 overflow-hidden">
       <GlowingHeartsBackground showHearts={showSuccess} />
       <BackgroundMusic play={showSuccess} />
+
       {!showSuccess ? (
         <>
+          <FloatingPetals />
           <div className="w-full max-w-lg text-center px-4">
             <div className="relative w-48 h-48 md:w-80 md:h-80 mx-auto mb-4">
               <Image
