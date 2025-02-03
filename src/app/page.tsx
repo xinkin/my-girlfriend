@@ -103,7 +103,7 @@ const ValentineProposal = () => {
           </div>
         </>
       ) : (
-        <div className="text-center px-4">
+        <div className="text-center px-4 relative">
           <div className="relative w-[400px] h-[400px] md:w-[500px] md:h-[500px] mx-auto mb-4">
             <Image
               src="https://gifdb.com/images/high/back-hug-morning-kisses-vc1o8cdcbgk7twpc.webp"
@@ -114,12 +114,15 @@ const ValentineProposal = () => {
               sizes="(max-width: 768px) 100vw, 900px"
             />
           </div>
-          <h1 className="text-2xl md:text-4xl font-bold text-pink-600 mb-4">
-            I love you baby.
-          </h1>
-          <p className="text-lg md:text-xl text-pink-500 mx-1 md:mx-0">
-            You are precious to me, and I want to be with you.
-          </p>
+          <div className="relative inline-block p-1 rounded-3xl">
+            <div className="absolute inset-0 bg-white/30 backdrop-blur-md rounded-3xl -z-10" />
+            <h1 className="text-2xl md:text-4xl font-bold text-pink-600 mb-4">
+              I love you baby.
+            </h1>
+            <p className="text-lg md:text-xl text-pink-500">
+              You are precious to me, and I want to be with you.
+            </p>
+          </div>
         </div>
       )}
     </div>

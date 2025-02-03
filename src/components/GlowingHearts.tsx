@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 
 interface Heart {
@@ -29,8 +30,8 @@ const GlowingHeartsBackground: React.FC<Props> = ({ showHearts = false }) => {
   useEffect(() => {
     const createHeartPositions = () => {
       const positions: Heart[] = [];
-      const numHearts = isMobile ? 20 : 50; // Increased for desktop
-      const minDistance = isMobile ? 15 : 15; // Reduced minimum distance for desktop
+      const numHearts = isMobile ? 35 : 50; // Increased for desktop
+      const minDistance = isMobile ? 15 : 12; // Adjusted for desktop
 
       const isValidPosition = (x: number, y: number): boolean => {
         return positions.every((heart) => {
@@ -40,38 +41,55 @@ const GlowingHeartsBackground: React.FC<Props> = ({ showHearts = false }) => {
         });
       };
 
-      // Divide screen into sectors to ensure better distribution
-      const sectorsX = isMobile ? 4 : 8;
-      const sectorsY = isMobile ? 5 : 6;
-      const heartsPerSector = Math.ceil(numHearts / (sectorsX * sectorsY));
+      if (isMobile) {
+        // Keep existing mobile logic
+        const sectorsX = 4;
+        const sectorsY = 5;
+        const heartsPerSector = Math.ceil(numHearts / (sectorsX * sectorsY));
 
-      for (let sx = 0; sx < sectorsX; sx++) {
-        for (let sy = 0; sy < sectorsY; sy++) {
-          for (let i = 0; i < heartsPerSector; i++) {
-            let attempts = 0;
-            let validPosition = false;
-            let x, y;
+        for (let sx = 0; sx < sectorsX; sx++) {
+          for (let sy = 0; sy < sectorsY; sy++) {
+            for (let i = 0; i < heartsPerSector; i++) {
+              let attempts = 0;
+              let validPosition = false;
+              let x, y;
 
-            while (!validPosition && attempts < 20) {
-              // Calculate position within sector
-              x = (sx / sectorsX) * 90 + Math.random() * (90 / sectorsX) + 5;
-              y = (sy / sectorsY) * 90 + Math.random() * (90 / sectorsY) + 5;
-              validPosition = isValidPosition(x, y);
-              attempts++;
-            }
+              while (!validPosition && attempts < 20) {
+                x = (sx / sectorsX) * 90 + Math.random() * (90 / sectorsX) + 5;
+                y = (sy / sectorsY) * 90 + Math.random() * (90 / sectorsY) + 5;
+                validPosition = isValidPosition(x, y);
+                attempts++;
+              }
 
-            if (validPosition && positions.length < numHearts) {
-              positions.push({
-                id: positions.length,
-                left: x!,
-                top: y!,
-                scale: isMobile
-                  ? 0.7 + Math.random() * 0.3
-                  : 0.9 + Math.random() * 0.4,
-                delay: Math.random() * 3,
-              });
+              if (validPosition && positions.length < numHearts) {
+                positions.push({
+                  id: positions.length,
+                  left: x!,
+                  top: y!,
+                  scale: 0.7 + Math.random() * 0.3,
+                  delay: Math.random() * 3,
+                });
+              }
             }
           }
+        }
+      } else {
+        // New desktop distribution logic
+        let attempts = 0;
+        while (positions.length < numHearts && attempts < 1000) {
+          const x = Math.random() * 95; // Use more of the screen width
+          const y = Math.random() * 95; // Use more of the screen height
+
+          if (isValidPosition(x, y)) {
+            positions.push({
+              id: positions.length,
+              left: x,
+              top: y,
+              scale: 0.9 + Math.random() * 0.4,
+              delay: Math.random() * 3,
+            });
+          }
+          attempts++;
         }
       }
       return positions;
