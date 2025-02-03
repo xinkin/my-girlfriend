@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { phrases } from "@/utils/phrases";
+// import BloomingFlower from "@/components/BloomingFlower";
 
 const ValentineProposal = () => {
   const [noButtonStyle, setNoButtonStyle] = useState<React.CSSProperties>({
@@ -57,12 +58,14 @@ const ValentineProposal = () => {
 
   return (
     <div className="min-h-screen w-full bg-pink-50 flex flex-col items-center justify-center p-4 relative overflow-hidden">
+      {/* <BloomingFlower show={showSuccess} /> */}
       {!showSuccess ? (
         <>
           <div className="w-full max-w-lg text-center px-4">
-            <div className="relative w-48 h-48 md:w-64 md:h-64 mx-auto mb-4">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto mb-4">
               <Image
-                src="https://media.tenor.com/iS4-T1xc_fAAAAAi/milk-and-mocha.gif"
+                // src="https://media.tenor.com/iS4-T1xc_fAAAAAi/milk-and-mocha.gif"
+                src="https://media.tenor.com/BBS_EGuWfVsAAAAj/peach-shy.gif"
                 alt="Milk and Mocha Bears Love"
                 fill
                 className="object-contain"
@@ -71,7 +74,10 @@ const ValentineProposal = () => {
               />
             </div>
             <h1 className="text-2xl md:text-4xl font-bold text-pink-600 mb-8">
-              Will you be my Valentine?
+              <div className="flex flex-col items-center justify-center gap-3">
+                <div>Riddhima Kapoor!</div>
+                <div>Will... you.. be. my Valentine?</div>
+              </div>
             </h1>
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
               <button
@@ -108,10 +114,10 @@ const ValentineProposal = () => {
             />
           </div>
           <h1 className="text-2xl md:text-4xl font-bold text-pink-600 mb-4">
-            Yay! I love you! ❤️
+            I love you baby.
           </h1>
           <p className="text-lg md:text-xl text-pink-500">
-            Looking forward to our special day together!
+            You are precious to me, and I want to be with you.
           </p>
         </div>
       )}
