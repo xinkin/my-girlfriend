@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { phrases } from "@/utils/phrases";
 
 const ValentineProposal = () => {
   const [noButtonStyle, setNoButtonStyle] = useState<React.CSSProperties>({
@@ -27,24 +28,18 @@ const ValentineProposal = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const responses = [
-    "Are you sure?",
-    "Really sure?",
-    "Think again!",
-    "Last chance!",
-    "Surely not?",
-    "You might regret this!",
-    "Give it another thought!",
-    "Are you absolutely certain?",
-    "This could be a mistake!",
-    "Have a heart!",
-  ];
-
   const moveButton = () => {
     const maxWidth = windowDimensions.width - 120;
     const maxHeight = windowDimensions.height - 60;
-    const x = Math.random() * (maxWidth > 0 ? maxWidth : 0);
-    const y = Math.random() * (maxHeight > 0 ? maxHeight : 0);
+    let x, y, distance;
+
+    do {
+      x = Math.random() * (maxWidth > 0 ? maxWidth : 0);
+      y = Math.random() * (maxHeight > 0 ? maxHeight : 0);
+      const centerX = windowDimensions.width / 2;
+      const centerY = windowDimensions.height / 2;
+      distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+    } while (distance < 150);
 
     setNoButtonStyle({
       position: "absolute",
@@ -52,7 +47,7 @@ const ValentineProposal = () => {
       top: `${y}px`,
       transition: "all 0.3s ease",
     });
-    setNoButtonText(responses[Math.floor(Math.random() * responses.length)]);
+    setNoButtonText(phrases[Math.floor(Math.random() * phrases.length)]);
     setYesScale(yesScale + 0.2);
   };
 
