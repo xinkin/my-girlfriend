@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { phrases } from "@/utils/phrases";
-// import BloomingFlower from "@/components/BloomingFlower";
 
 const ValentineProposal = () => {
   const [noButtonStyle, setNoButtonStyle] = useState<React.CSSProperties>({
@@ -62,9 +61,8 @@ const ValentineProposal = () => {
       {!showSuccess ? (
         <>
           <div className="w-full max-w-lg text-center px-4">
-            <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto mb-4">
+            <div className="relative w-48 h-48 md:w-80 md:h-80 mx-auto mb-4">
               <Image
-                // src="https://media.tenor.com/iS4-T1xc_fAAAAAi/milk-and-mocha.gif"
                 src="https://media.tenor.com/BBS_EGuWfVsAAAAj/peach-shy.gif"
                 alt="Milk and Mocha Bears Love"
                 fill
@@ -86,7 +84,7 @@ const ValentineProposal = () => {
                   transform: `scale(${yesScale})`,
                   transition: "transform 0.3s ease",
                 }}
-                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full text-lg md:text-xl whitespace-nowrap"
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-2xl text-lg md:text-xl whitespace-nowrap"
               >
                 Yes
               </button>
@@ -94,7 +92,7 @@ const ValentineProposal = () => {
                 onMouseOver={moveButton}
                 onClick={moveButton}
                 style={noButtonStyle}
-                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded-full text-lg md:text-xl whitespace-nowrap"
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded-2xl text-lg md:text-xl whitespace-nowrap"
               >
                 {noButtonText}
               </button>
@@ -116,7 +114,7 @@ const ValentineProposal = () => {
           <h1 className="text-2xl md:text-4xl font-bold text-pink-600 mb-4">
             I love you baby.
           </h1>
-          <p className="text-lg md:text-xl text-pink-500">
+          <p className="text-lg md:text-xl text-pink-500 mx-1 md:mx-0">
             You are precious to me, and I want to be with you.
           </p>
         </div>
