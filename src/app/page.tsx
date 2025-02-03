@@ -31,17 +31,45 @@ const ValentineProposal = () => {
   }, []);
 
   const moveButton = () => {
-    const maxWidth = windowDimensions.width - 120;
-    const maxHeight = windowDimensions.height - 60;
-    let x, y, distance;
+    const padding = 20;
+    const buttonWidth = 120;
+    const buttonHeight = 40;
+
+    // Calculate safe boundaries
+    const maxX = Math.max(0, windowDimensions.width - buttonWidth - padding);
+    const maxY = Math.max(0, windowDimensions.height - buttonHeight - padding);
+
+    const yesButtonRegion = {
+      left: windowDimensions.width / 2 - 100,
+      right: windowDimensions.width / 2 + 100,
+      top: windowDimensions.height / 2 - 50,
+      bottom: windowDimensions.height / 2 + 50,
+    };
+
+    let x, y;
+    let isValidPosition = false;
+    let attempts = 0;
 
     do {
-      x = Math.random() * (maxWidth > 0 ? maxWidth : 0);
-      y = Math.random() * (maxHeight > 0 ? maxHeight : 0);
-      const centerX = windowDimensions.width / 2;
-      const centerY = windowDimensions.height / 2;
-      distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
-    } while (distance < 150);
+      x = Math.min(Math.max(padding, Math.random() * maxX), maxX);
+      y = Math.min(Math.max(padding, Math.random() * maxY), maxY);
+
+      // Check if position overlaps with Yes button region
+      isValidPosition = !(
+        x < yesButtonRegion.right &&
+        x + buttonWidth > yesButtonRegion.left &&
+        y < yesButtonRegion.bottom &&
+        y + buttonHeight > yesButtonRegion.top
+      );
+
+      attempts++;
+    } while (!isValidPosition && attempts < 50);
+
+    // Fallback position if no valid spot found
+    if (!isValidPosition) {
+      x = Math.random() < 0.5 ? padding : maxX;
+      y = Math.random() < 0.5 ? padding : maxY;
+    }
 
     setNoButtonStyle({
       position: "absolute",
@@ -87,7 +115,7 @@ const ValentineProposal = () => {
                   transform: `scale(${yesScale})`,
                   transition: "transform 0.3s ease",
                 }}
-                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-2xl text-lg md:text-xl whitespace-nowrap"
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-2xl text-sm md:text-lg whitespace-nowrap"
               >
                 Yes
               </button>
@@ -95,7 +123,7 @@ const ValentineProposal = () => {
                 onMouseOver={moveButton}
                 onClick={moveButton}
                 style={noButtonStyle}
-                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded-2xl text-lg md:text-xl whitespace-nowrap"
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-2xl text-sm md:text-lg whitespace-normal max-w-[200px] min-h-[40px]"
               >
                 {noButtonText}
               </button>
