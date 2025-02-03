@@ -115,7 +115,7 @@ const ValentineProposal = () => {
                   transform: `scale(${yesScale})`,
                   transition: "transform 0.3s ease",
                 }}
-                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-2xl text-sm md:text-lg whitespace-nowrap"
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-2xl text-md md:text-xl whitespace-nowrap"
               >
                 Yes
               </button>
@@ -123,7 +123,7 @@ const ValentineProposal = () => {
                 onMouseOver={moveButton}
                 onClick={moveButton}
                 style={noButtonStyle}
-                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-2xl text-sm md:text-lg whitespace-normal max-w-[200px] min-h-[40px]"
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-2xl text-md md:text-xl whitespace-normal max-w-[200px] min-h-[40px]"
               >
                 {noButtonText}
               </button>
