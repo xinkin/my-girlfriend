@@ -5,7 +5,7 @@ import { CSSProperties } from 'react';
  * This ensures the puzzle is always solvable (random shuffles can create unsolvable states)
  */
 export function shufflePuzzle(moves: number = 150): number[] {
-  let tiles = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+  const tiles = [1, 2, 3, 4, 5, 6, 7, 8, 0];
   let emptyIndex = 8;
 
   for (let i = 0; i < moves; i++) {

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   shufflePuzzle,
   isWinCondition,
@@ -126,6 +127,13 @@ const PuzzlePage = () => {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-pink-50 to-white flex flex-col items-center justify-center p-4">
+      {/* Back Button */}
+      <Link href="/" className="fixed top-4 left-4 z-50">
+        <button className="bg-pink-300/60 hover:bg-pink-400/80 text-pink-700 text-sm py-1.5 px-3 rounded-lg transition-all duration-200 hover:scale-105 flex items-center gap-1">
+          Back
+        </button>
+      </Link>
+
       <div className="text-center">
         <h1 className="text-3xl md:text-5xl font-bold text-pink-600 mb-2">
           Sliding Puzzle

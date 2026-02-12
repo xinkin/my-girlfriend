@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { phrases } from "@/utils/phrases";
 import BackgroundMusic from "@/components/BackgroundMusic";
 import GlowingHeartsBackground from "@/components/GlowingHearts";
@@ -96,6 +97,13 @@ const ValentineProposal = () => {
     <div className="min-h-screen w-full bg-pink-50 flex flex-col items-center justify-center p-4 relative z-10 overflow-hidden">
       <GlowingHeartsBackground showHearts={showSuccess} />
       <BackgroundMusic play={showSuccess} />
+
+      {/* Top Right Puzzle Button */}
+      <Link href="/puzzle" className="fixed top-4 right-4 z-50">
+        <button className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 md:px-6 rounded-2xl transition-all duration-200 hover:scale-105 shadow-lg">
+          🧩 Puzzle
+        </button>
+      </Link>
 
       {!showSuccess ? (
         <>
